@@ -5,31 +5,40 @@ todoApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.when('/', {
       templateUrl: '/templates/todo.html',
-      controller: 'TodoCtrl'
+      controller: 'TodoController',
     }).otherwise({
       redirectTo: '/',
       caseInsensitiveMatch: true
     })
   }]);
 
-todoApp.controller('TodoCtrl', ['$scope', '$rootScope', 'TodoService', function($scope, $rootScope, TodoService) {
-  $scope.formData = {};
-  $scope.todos = [];
+todoApp.controller('TodoController', TodoController);
+
+function TodoController (TodoService) {
+
+  var vm = this;
+
+  vm.formData = {};
+  vm.todos = [];
 
   TodoService.getTodos().then(function(response) {
-    $scope.todos = response;
+    vm.todos = response;
   });
 
-  $scope.addTodo = function() {
-    TodoService.addTodo($scope.formData).then(function(response) {
-      $scope.todos.push($scope.formData)
-      $scope.formData = {};
+  function addTodo () {
+    TodoService.addTodo(vm.formData).then(function(response) {
+      vm.todos.push(vm.formData)
+      vm.formData = {};
     });
   }
 
-  $scope.removeTodo = function(todo) {
+  function removeTodo(todo) {
     TodoService.removeTodo(todo).then(function(response) {
-      $scope.todos.splice($scope.todos.indexOf(todo), 1)
+      vm.todos.splice(vm.todos.indexOf(todo), 1)
     });
   }
-}]);
+
+  vm.addTodo = addTodo;
+  vm.removeTodo = removeTodo;
+
+}
