@@ -9,6 +9,39 @@ module.exports = {
 
   attributes: {
 
+    email: {
+      type: 'string',
+      email: 'true',
+      unique: 'true'
+    },
+
+    username: {
+      type: 'string',
+      unique: 'true'
+    },
+
+    encryptedPassword: {
+      type: 'string'
+    },
+
+    deleted: {
+      type: 'boolean'
+    },
+
+    admin: {
+      type: 'boolean'
+    },
+
+    banned: {
+      type: 'boolean'
+    },
+
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      delete obj.confirmation;
+      //delete obj.encryptedPassword;
+      return obj;
+    }
   }
 };
-
