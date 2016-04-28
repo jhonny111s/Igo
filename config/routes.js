@@ -45,5 +45,6 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'GET /signup': 'UserController.signup',
+  'POST /signup': 'UserController.signup',
+  'POST /login': 'UserController.login',
 };
