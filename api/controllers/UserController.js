@@ -9,7 +9,7 @@ var validator = require('validator');
 var Passwords = require('machinepack-passwords');
 
 //EV: error validatation
-function validateRequest(req, res) {
+function validateRequest(req) {
   console.log(req.allParams());
   mesagge = {};
 
@@ -42,7 +42,7 @@ module.exports = {
 
   //registro
   signup: function(req, res) {
-    msg = validateRequest(req, res);
+    msg = validateRequest(req);
 
     if (!_.isEmpty(msg)) {
       return res.badRequest(msg);

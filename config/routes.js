@@ -47,4 +47,12 @@ module.exports.routes = {
   ***************************************************************************/
   'POST /signup': 'UserController.signup',
   'POST /login': 'UserController.login',
+  'GET /user': 'UserController.find',
+  'GET /user/:id': 'UserController.find',
+
+  'GET /image': 'ImageController.find',
+  'GET /image/:id': 'ImageController.find',
+  'POST /image': 'ImageController.create',
+  'PUT /image/:id': 'ImageController.update',
+  'DELETE /image/:id': 'ImageController.destroy',
 };
