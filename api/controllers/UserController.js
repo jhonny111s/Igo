@@ -40,6 +40,64 @@ function validateRequest(req) {
 
 module.exports = {
 
+  find: function(req, res) {
+    User.find({
+        id: req.param('id')
+      })
+      .then(function(user) {
+        console.log(req.param('id'));
+        console.log(user);
+        if (!_.isEmpty(user)) {
+          return res.send({
+            "code": 200,
+            "message": "OK",
+            "data": [user[0]]
+          });
+        } else {
+          return res.send({
+            "code": 204,
+            "message": "No content",
+            "data": []
+          });
+        }
+      })
+      .catch(function(err) {
+        return res.send({
+          "code": 500,
+          "message": "Error to get user",
+          "data": err
+        });
+      });
+  },
+
+  findAll: function(req, res) {
+    User.find({})
+      .then(function(user) {
+        console.log(req.param('id'));
+        console.log(user);
+        if (!_.isEmpty(user)) {
+          return res.send({
+            "code": 200,
+            "message": "OK",
+            "data": [user]
+          });
+        } else {
+          return res.send({
+            "code": 204,
+            "message": "No content",
+            "data": []
+          });
+        }
+      })
+      .catch(function(err) {
+        return res.send({
+          "code": 500,
+          "message": "Error to get user",
+          "data": err
+        });
+      });
+  },
+
   //registro
   signup: function(req, res) {
     msg = validateRequest(req);
